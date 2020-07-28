@@ -1,3 +1,7 @@
+''' NOTES '''
+# Time Complexity
+# Worst-case O(n^2), Best-Case O(nlogn), Average O(nlogn)
+
 def quickSort(arr, low, high):
     if (low >= high):                   # Base case
         return
