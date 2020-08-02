@@ -109,7 +109,8 @@ def preOrderRecursive(root):
 
     helper(root, ret)
     return ret
-def preOrderIterative(root): 
+def preOrderIterative(root):
+    print('--- Pre-Order Iterative ---') 
     if root is None: 
         return 
   
@@ -122,7 +123,7 @@ def preOrderIterative(root):
         cur = stack.get() 
         ret.append(cur.val)
           
-        if cur.right is not None: 
+        if cur.right is not None: # Put right in first because LIFO, you want left to come out first
             stack.put(cur.right) 
         if cur.left is not None: 
             stack.put(cur.left) 
