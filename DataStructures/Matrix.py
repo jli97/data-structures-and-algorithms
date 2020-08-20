@@ -13,10 +13,11 @@ def inPlaceTranspose(matrix): # Must be a square matrix
     l = len(matrix)
     
     if(len(matrix) != len(matrix[0])):
+        print('Only works on square matrix')
         return None
         
     for i in range(l):
-        for j in range(i, l):
+        for j in range(i, l): #range(i, l) makes it so that we only travese the first diagonal half of the matrix
             temp = matrix[i][j]
             matrix[i][j] = matrix[j][i]
             matrix[j][i] = temp

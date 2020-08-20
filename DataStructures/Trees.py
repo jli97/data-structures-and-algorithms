@@ -145,9 +145,33 @@ def postOrderRecursive(root):
     helper(root, ret)
     return ret
 
+def levelOrderIterative(root):
+    ret = []
+
+    if root == None:
+        return ret
+    
+    q = queue.Queue() #Creates a FIFO queue
+    q.put(root)
+
+    while(q.empty() == False):
+
+        node = q.get()
+        ret.append(node.val)
+
+        if node.left != None:
+            q.put(node.left)
+        if node.right != None:
+            q.put(node.right)
+    
+    return ret
+            
+
 def main():
     arr = [7,4,9,3,5,1,8,2,6]
     root = buildBST(arr)
+
+    print(levelOrderIterative(root))
     
 
     
