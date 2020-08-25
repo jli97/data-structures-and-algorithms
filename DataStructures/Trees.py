@@ -1,4 +1,5 @@
 import queue as queue
+import collections
 
 class TreeNode:
     def __init__(self, val):
@@ -62,7 +63,7 @@ def validateBST(root): #In-order traversal of tree. Prev must always be smaller
     return True
 
 ''' TRAVERSALS '''
-def inOrderIterative(root): #using a stack
+def inOrderIterative(root): # Using a stack
     print('--- In-Order Iteratively ---')
     
     stack = queue.LifoQueue()
@@ -109,7 +110,7 @@ def preOrderRecursive(root):
 
     helper(root, ret)
     return ret
-def preOrderIterative(root):
+def preOrderIterative(root): # Use a stack
     print('--- Pre-Order Iterative ---') 
     if root is None: 
         return 
@@ -145,7 +146,7 @@ def postOrderRecursive(root):
     helper(root, ret)
     return ret
 
-def levelOrderIterative(root):
+def levelOrderIterative(root): 
     ret = []
 
     if root == None:
@@ -166,6 +167,27 @@ def levelOrderIterative(root):
     
     return ret
             
+
+def isBalanced(root): #From elements of the programming interview
+        BalancedStatusWithHeight = collections.namedtuple('BalancedStatusWithHeight', ('balanced', 'height'))
+        
+        def dfs(root):
+            if not root: # Base Case
+                return BalancedStatusWithHeight(True, -1)
+            
+            left_result = dfs(root.left)    
+            if not left_result.balanced:
+                return BalancedStatusWithHeight(False, 0)
+            
+            right_result = dfs(root.right)
+            if not right_result.balanced:
+                return BalancedStatusWithHeight(False, 0)
+            
+            is_balanced = abs(left_result.height - right_result.height) <= 1
+            height = max(left_result.height, right_result.height) + 1 # Null children return height of -1, so need to + 1 to make height == 0
+            return BalancedStatusWithHeight(is_balanced, height)
+        
+        return dfs(root).balanced
 
 def main():
     arr = [7,4,9,3,5,1,8,2,6]
