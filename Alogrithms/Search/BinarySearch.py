@@ -7,7 +7,8 @@ def regularBinarySearch(target):
     left = 0
     right = len(sorted_arr) - 1
 
-    while (left <= right): # Notice equality as we dont want the loop to break when left == right which is the last possible iteration
+    while (left <= right): # Notice equality as we dont want the loop to break when 
+                           # left == right which is the last possible iteration
         mid = left + (right - left) // 2
 
         if sorted_arr[mid] is target:
@@ -21,6 +22,19 @@ def regularBinarySearch(target):
     return -1 #If not found
 
 ''' Binary Search for lowest value in Rotated Array''' #returns idx of lowest value
+
+def recursiveBinarySearch(arr, left, right, target):
+    if right >= left:
+        mid = left + (right - left) // 2
+    
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] > target:
+            return recursiveBinarySearch(arr, left, mid - 1, target)
+        else:
+            return recursiveBinarySearch(arr, mid + 1, right, target)
+    else:
+        return -1
 
 def minValBinarySearch(): 
     left = 0
