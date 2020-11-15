@@ -168,26 +168,22 @@ def levelOrderIterative(root):
     return ret
             
 
-def isBalanced(root): #From elements of the programming interview
-        BalancedStatusWithHeight = collections.namedtuple('BalancedStatusWithHeight', ('balanced', 'height'))
+def isBalanced(root) -> bool:
+    # Bottom up recursion
+    # Each node returns its max depth of its right and left subtrees
+    def check(root):
+        if root is None:
+            return 0
+        left  = check(root.left)
+        right = check(root.right)
+        # If left or right is -1, the tree is unbalanced, keep returning -1
+        # Check the difference in depth between left and right
+        if left == -1 or right == -1 or abs(left - right) > 1: 
+            return -1
+        return 1 + max(left, right) # The depth of a ndoe is equal to the max depth
+                                    # of its children nodes plus one
         
-        def dfs(root):
-            if not root: # Base Case
-                return BalancedStatusWithHeight(True, -1)
-            
-            left_result = dfs(root.left)    
-            if not left_result.balanced:
-                return BalancedStatusWithHeight(False, 0)
-            
-            right_result = dfs(root.right)
-            if not right_result.balanced:
-                return BalancedStatusWithHeight(False, 0)
-            
-            is_balanced = abs(left_result.height - right_result.height) <= 1
-            height = max(left_result.height, right_result.height) + 1 # Null children return height of -1, so need to + 1 to make height == 0
-            return BalancedStatusWithHeight(is_balanced, height)
-        
-        return dfs(root).balanced
+    return check(root) != -1
 
 def main():
     arr = [7,4,9,3,5,1,8,2,6]
