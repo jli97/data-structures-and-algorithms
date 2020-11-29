@@ -9,8 +9,8 @@ class Solution(object):
             
             for col in range(n):
                 # Check if col is valid 
-                
-                if all(abs(c - col) not in (0, row - i) for i, c in enumerate(col_placement[:row])): # abs(c - col) not in (0, row - i) checks for both diagonal (row - i) and column (0)
+                # abs(c - col) not in (0, row - i) checks for both diagonal (row - i) and column 0
+                if all(abs(c - col) not in (0, row - i) for i, c in enumerate(col_placement[:row])): 
                     col_placement[row] = col    
                     solveRow(row + 1)           # If this for-loop ends without making it here, we will go back to the last recursive call and try other cols
                 

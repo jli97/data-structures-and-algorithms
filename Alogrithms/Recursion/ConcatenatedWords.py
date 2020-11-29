@@ -37,9 +37,8 @@ class Solution:
         
         def search(word, idx, node, count, ret):
             if idx == len(word):
-                if (node.isWord or node == t.root) and count > 1 and word not in ret:
-                    ret.add(word)
-            
+                if node == t.root and count > 1 and word not in ret: # If node == t.root, the last char
+                    ret.add(word)                                    # was the end of a word
                 return
                 
             char = word[idx]
