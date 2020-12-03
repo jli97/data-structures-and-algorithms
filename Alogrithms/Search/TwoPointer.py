@@ -1,3 +1,5 @@
+
+
 ''' Container with Most Water '''
 
 def maxArea(height):
@@ -16,7 +18,24 @@ def maxArea(height):
             right = right - 1
     
     return max_area
-
+''' Two Sum with Sorted Array '''
+def twoSum(self, numbers, target):
+        """
+        :type numbers: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        
+        start = 0
+        end = len(numbers) - 1
+        
+        while start < end:
+            if numbers[start] + numbers[end] > target:
+                end -= 1
+            elif numbers[start] + numbers[end] < target:
+                start += 1
+            else:
+                return [start + 1, end + 1]
 def main():
     height = [1,8,6,2,5,4,8,3,7]
     print("Result of maxArea():  " + str(maxArea(height)))
