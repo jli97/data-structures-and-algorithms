@@ -1,5 +1,5 @@
 import queue as queue
-import collections
+from collections import deque
 
 class TreeNode:
     def __init__(self, val):
@@ -42,7 +42,7 @@ def buildBST(arr):
 
     return helper(sort)
 
-def validateBST(root): #In-order traversal of tree. Prev must always be smaller
+def validateBST(root): #In-order traversal of a BST. Prev must always be smaller
     if root == None:
         return True
 
@@ -58,27 +58,25 @@ def validateBST(root): #In-order traversal of tree. Prev must always be smaller
         if(prev != None and prev.val >= root.val):
             return False
         prev = root
+        
         root = root.right #Traverses right 
 
     return True
 
 ''' TRAVERSALS '''
-def inOrderIterative(root): # Using a stack
-    print('--- In-Order Iteratively ---')
-    
-    stack = queue.LifoQueue()
+def iterativeInOrder(node):
+    print('--- In-Order Iterative ---')
+
+    s = []
     ret = []
-    while(root != None or stack.qsize() > 0):
-        while(root != None): #Traverse left first
-            stack.put(root)
-            root = root.left
-        
-        root = stack.get() # If no more left, pop out of stack and evaluate
-        ret.append(root.val)
-
-        root = root.right # Check right. If right is None it wont be put in the stack and will continue to the next node in the stack
-
-    return ret
+    while s or node != None:
+        if (node != None):
+            s.append(node) 
+            node = node.left 
+        else:
+            node = s.pop() 
+            ret.append(node.val)
+            node = node.right
 
 def inOrderRecursive(root):
     print('--- In-Order Recursively ---')
@@ -110,24 +108,23 @@ def preOrderRecursive(root):
 
     helper(root, ret)
     return ret
-def preOrderIterative(root): # Use a stack
+def preOrderIterative(root): 
     print('--- Pre-Order Iterative ---') 
     if root is None: 
         return 
   
-    stack = queue.LifoQueue()
-    stack.put(root) 
+    stack = [root]
   
     ret = []
-    while(stack.qsize() > 0): 
+    while stack: 
           
-        cur = stack.get() 
+        cur = stack.pop() 
         ret.append(cur.val)
           
-        if cur.right is not None: # Put right in first because LIFO, you want left to come out first
-            stack.put(cur.right) 
+        if cur.right is not None:    # Put right in first because LIFO, 
+            stack.append(cur.right)  # you want left to come out first
         if cur.left is not None: 
-            stack.put(cur.left) 
+            stack.append(cur.left) 
 
     return ret
 def postOrderRecursive(root):
@@ -152,18 +149,18 @@ def levelOrderIterative(root):
     if root == None:
         return ret
     
-    q = queue.Queue() #Creates a FIFO queue
-    q.put(root)
+    q = deque() #Creates a FIFO queue
+    q.append(root)
 
     while(q.empty() == False):
 
-        node = q.get()
+        node = q.popleft()
         ret.append(node.val)
 
         if node.left != None:
-            q.put(node.left)
+            q.append(node.left)
         if node.right != None:
-            q.put(node.right)
+            q.append(node.right)
     
     return ret
             
@@ -185,11 +182,26 @@ def isBalanced(root) -> bool:
         
     return check(root) != -1
 
+def isSymmetric(root) -> bool:
+    if root == None:
+            return True
+        
+    def recursive(left, right):
+        if left == None or right == None:
+            return left == right
+        
+        if(left.val != right.val): 
+            return False
+        
+        return recursive(left.left, right.right) and recursive(left.right, right.left) # This deals with the symmetry
+    
+    return recursive(root.left , root.right) 
+
 def main():
     arr = [7,4,9,3,5,1,8,2,6]
     root = buildBST(arr)
 
-    print(levelOrderIterative(root))
+    print(iterativeInOrder(root))
     
 
     
