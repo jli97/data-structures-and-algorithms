@@ -28,7 +28,8 @@ def strStr(haystack, needle):
         
         if hHash == nHash:
                 return 0
-            
+        
+        #Rolling hash
         for i in range(len(needle), len(haystack)):
             
             hHash -= (base ** (len(needle) - 1)) * values[ord(haystack[i - len(needle)]) - ord('a')] # Removes first value in the window

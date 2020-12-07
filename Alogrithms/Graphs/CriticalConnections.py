@@ -5,7 +5,7 @@ from collections import defaultdict
 #   groups. Then find the edges that connect these strongly connected groups
 #   
 #   All nodes strongly connected together will have the same rank. This means
-#   any ndoe with the same rank will stay connected, even if one edge within the
+#   any node with the same rank will stay connected, even if one edge within the
 #   group is broken. 
 
 
@@ -28,14 +28,15 @@ def criticalConnections(self, n: int, connections: List[List[int]]) -> List[List
                 low[cur] = min(low[cur], low[neighbor]) 
                 
                 # If this neighbor node is not part of a cycle its rank will be higher
-                # than the current rank
+                # than the current rank. Thus, the edge from cur to neighbor is a 
+                # critical connection as it is not part of a strongly connected component
                 if low[neighbor] > rank:    
                     ret.append([cur, neighbor])
             
             
         
         graph = defaultdict(list)
-        rank = 0  # How far a node is from the starting node of the dfs
+        rank = 0  # Represents how far a node is from the starting node of the dfs
         low = [0] * n   # The lowest ranked node that can reach this node
         visited = [False] * n
         
