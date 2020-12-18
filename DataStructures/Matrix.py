@@ -1,4 +1,4 @@
-
+from collections import defaultdict
 def transpose(A):
         R, C = len(A), len(A[0])
         ans = [[None] * R for _ in range(C)] 
@@ -21,6 +21,19 @@ def inPlaceTranspose(matrix): # Must be a square matrix
             temp = matrix[i][j]
             matrix[i][j] = matrix[j][i]
             matrix[j][i] = temp
+
+def getDiagonals(matrix):
+    left_to_right_diagonals = defaultdict(set)
+    right_to_left_diagonals = defaultdict(set)
+
+    for i in range(len(matrix)):
+        for j in range(len(matrix[0])):
+            # Notice the i - j and i + j
+            left_to_right_diagonals[i - j].add(matrix[i][j])
+            right_to_left_diagonals[i + j].add(matrix[i][j])
+
+    print(left_to_right_diagonals)
+    print(right_to_left_diagonals)
 
 def printMatrix(A):
     for row in A:

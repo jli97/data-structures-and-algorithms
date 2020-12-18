@@ -67,16 +67,16 @@ def validateBST(root): #In-order traversal of a BST. Prev must always be smaller
 def iterativeInOrder(node):
     print('--- In-Order Iterative ---')
 
-    s = []
+    stack = []
     ret = []
-    while s or node != None:
-        if (node != None):
-            s.append(node) 
-            node = node.left 
+    while stack or node:
+        if node:
+            stack.append(node) 
+            node = node.left # Go left
         else:
-            node = s.pop() 
-            ret.append(node.val)
-            node = node.right
+            node = stack.pop() 
+            ret.append(node.val) # Visit node
+            node = node.right # Go right
 
 def inOrderRecursive(root):
     print('--- In-Order Recursively ---')
