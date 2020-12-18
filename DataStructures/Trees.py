@@ -78,6 +78,8 @@ def iterativeInOrder(node):
             ret.append(node.val) # Visit node
             node = node.right # Go right
 
+    return ret
+
 def inOrderRecursive(root):
     print('--- In-Order Recursively ---')
 
@@ -108,6 +110,7 @@ def preOrderRecursive(root):
 
     helper(root, ret)
     return ret
+
 def preOrderIterative(root): 
     print('--- Pre-Order Iterative ---') 
     if root is None: 
@@ -127,6 +130,7 @@ def preOrderIterative(root):
             stack.append(cur.left) 
 
     return ret
+    
 def postOrderRecursive(root):
     print('--- Post-Order Recursively ---')
 
