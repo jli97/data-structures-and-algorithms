@@ -130,7 +130,7 @@ def preOrderIterative(root):
             stack.append(cur.left) 
 
     return ret
-    
+
 def postOrderRecursive(root):
     print('--- Post-Order Recursively ---')
 
@@ -167,39 +167,7 @@ def levelOrderIterative(root):
             q.append(node.right)
     
     return ret
-            
 
-def isBalanced(root) -> bool:
-    # Bottom up recursion
-    # Each node returns its max depth of its right and left subtrees
-    def check(root):
-        if root is None:
-            return 0
-        left  = check(root.left)
-        right = check(root.right)
-        # If left or right is -1, the tree is unbalanced, keep returning -1
-        # Check the difference in depth between left and right
-        if left == -1 or right == -1 or abs(left - right) > 1: 
-            return -1
-        return 1 + max(left, right) # The depth of a ndoe is equal to the max depth
-                                    # of its children nodes plus one
-        
-    return check(root) != -1
-
-def isSymmetric(root) -> bool:
-    if root == None:
-            return True
-        
-    def recursive(left, right):
-        if left == None or right == None:
-            return left == right
-        
-        if(left.val != right.val): 
-            return False
-        
-        return recursive(left.left, right.right) and recursive(left.right, right.left) # This deals with the symmetry
-    
-    return recursive(root.left , root.right) 
 
 def main():
     arr = [7,4,9,3,5,1,8,2,6]
