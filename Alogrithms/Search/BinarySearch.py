@@ -36,7 +36,7 @@ def recursiveBinarySearch(arr, left, right, target):
     else:
         return -1
 
-def minValBinarySearch(): 
+def minValBinarySearch(): #Rotated sorted array
     left = 0
     right = len(sorted_rotated_arr) - 1
 
@@ -55,7 +55,7 @@ def main():
     target  = 8
 
     print("Result of regularBinarySearch(): " + str(regularBinarySearch(target)))
-    print("Result of regularBinarySearch(): " + str(minValBinarySearch()))
+    print("Result of minValBinarySearch(): " + str(minValBinarySearch()))
 
 
 if __name__ == "__main__":
