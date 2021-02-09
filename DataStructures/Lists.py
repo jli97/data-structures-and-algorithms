@@ -1,9 +1,10 @@
 class ListNode():
-    def __init__(self, val=0, next=None):
+    def __init__(self, val=0):
         self.val = val
-        self.next = next
+        self.next = None
+        self.prev = None
     
-def createLinkedList(arr: list, head: ListNode): #Array to LinkedList
+def createSinglyLinkedList(arr: list, head: ListNode): #Array to LinkedList
     for val in arr:
         newNode = ListNode(val)
         head.next = newNode
@@ -16,6 +17,14 @@ def createLinkedList(arr: list, head: ListNode): #Array to LinkedList
 
         When you reference head, you lose the reference of your previous node
         '''
+
+def createDoublyLinkedList(arr: list, head: ListNode):
+    for val in arr:
+        newNode = ListNode(val)
+        newNode.prev = head 
+        head.next = newNode
+        head = head.next
+
 def reverseListRecursive(self, head: ListNode) -> ListNode:
     if head is None or head.next is None: 
         return head
@@ -46,9 +55,25 @@ def printLinkedList(head: ListNode):
 def main():
     arr = [1,2,3,4,5,6,7]
     dummyHead = ListNode()
-    createLinkedList(arr, dummyHead)
-
+    createDoublyLinkedList(arr, dummyHead)
     printLinkedList(dummyHead)
+    tail = dummyHead
 
+    while tail.next:
+        tail = tail.next 
+
+    new_head = ListNode(tail.val)
+    cur = new_head 
+
+    while tail.prev:
+        tail = tail.prev 
+        newNode = ListNode(tail.val)
+        newNode.prev = cur
+        cur.next = newNode 
+        cur = cur.next 
+    
+    while cur:
+        print(cur.val)
+        cur = cur.prev
 if __name__ == "__main__":
     main()
