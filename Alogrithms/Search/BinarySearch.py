@@ -11,7 +11,7 @@ def regularBinarySearch(target):
                            # left == right which is the last possible iteration
         mid = left + (right - left) // 2
 
-        if sorted_arr[mid] is target:
+        if sorted_arr[mid] == target:
             return mid
         
         if sorted_arr[mid] > target:
